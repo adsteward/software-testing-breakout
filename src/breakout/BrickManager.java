@@ -11,15 +11,15 @@ import java.util.List;
  */
 
 public class BrickManager {
-    private GraphicsGroup brickGroup;
-    private List<Brick> bricks = new ArrayList<>();
+    public GraphicsGroup brickGroup;
+    public List<Brick> bricks = new ArrayList<>();
 
     /**
      * Constructor which creates a brickGroup graphicsGroup, calls createBricks method
      * to build a wall and adds it to canvas.
      * @param canvas
      */
-    BrickManager(CanvasWindow canvas) {
+    public BrickManager(CanvasWindow canvas) {
 
 
         brickGroup = new GraphicsGroup();
