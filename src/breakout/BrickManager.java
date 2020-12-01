@@ -11,8 +11,8 @@ import java.util.List;
  */
 
 public class BrickManager {
-    private GraphicsGroup brickGroup;
-    private List<Brick> bricks = new ArrayList<>();
+    public GraphicsGroup brickGroup;
+    public List<Brick> bricks = new ArrayList<>();
 
     /**
      * Constructor which creates a brickGroup graphicsGroup, calls createBricks method
