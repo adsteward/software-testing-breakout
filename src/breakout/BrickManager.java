@@ -19,7 +19,7 @@ public class BrickManager {
      * to build a wall and adds it to canvas.
      * @param canvas
      */
-    BrickManager(CanvasWindow canvas) {
+    public BrickManager(CanvasWindow canvas) {
 
 
         brickGroup = new GraphicsGroup();
@@ -37,9 +37,13 @@ public class BrickManager {
         double y = canvas.getWidth() * 0.15;
         double x = margin;
         double length = 0;
+        int hitsNeeded;
         for (int i = 0; i < 24; i++) {
+
+            hitsNeeded = (i >= 12)  ? 2 : 1;
+
             Brick brick = new Brick(x, y, canvas.getWidth() * 0.1,
-                    canvas.getWidth() * 0.03);
+                    canvas.getWidth() * 0.03, hitsNeeded);
             length = length + brick.getWidth() + spacing;
             if (length < canvas.getWidth() - 4 * margin) {
                 x = x + brick.getWidth() + spacing;
@@ -64,8 +68,13 @@ public class BrickManager {
     public void removeBrick(Ball ball) {
         for (int i = 0; i < bricks.size(); i++) {
             if (ball.getBounds().intersects(bricks.get(i).getBounds())) {
-                brickGroup.remove(bricks.get(i));
-                bricks.remove(bricks.get(i));
+
+                Brick hitBrick = bricks.get(i);
+                hitBrick.hit();
+                if (hitBrick.getHitsRemaining() == 0) {
+                    brickGroup.remove(hitBrick);
+                    bricks.remove(hitBrick);
+                }
                 ball.changeVelocityDy();
             }
         }
@@ -99,6 +108,10 @@ public class BrickManager {
             loseMessage.setCenter(300, 400);
 
         }
+    }
+
+    public List<Brick> getBricks() {
+        return bricks;
     }
 
     @Override
