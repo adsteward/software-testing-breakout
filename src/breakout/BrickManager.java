@@ -91,13 +91,14 @@ public class BrickManager {
      * @param paddle
      */
 
-    public void winningLosingCondition(Ball ball, CanvasWindow canvas, Paddle paddle) {
+    public GraphicsText winningLosingCondition(Ball ball, CanvasWindow canvas, Paddle paddle) {
         if (bricks.size() == 0) {
             canvas.animate(ball::stopBall);
             GraphicsText victoryMessage = new GraphicsText("Congratulations! You Won! ");
             victoryMessage.setFontSize(20);
             canvas.add(victoryMessage);
             victoryMessage.setCenter(300, 400);
+            return victoryMessage;
         }
         if (ball.checkForLose(paddle, canvas) == 0) {
             canvas.animate(ball::stopBall);
@@ -106,8 +107,10 @@ public class BrickManager {
             loseMessage.setFontSize(20);
             canvas.add(loseMessage);
             loseMessage.setCenter(300, 400);
+            return loseMessage;
 
         }
+        return null;
     }
 
     public List<Brick> getBricks() {

@@ -3,6 +3,7 @@ package breakout.tests;
 import breakout.Ball;
 import breakout.Brick;
 import breakout.BrickManager;
+import breakout.Paddle;
 import comp127graphics.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -128,6 +129,22 @@ public class TestTwoHitBricks {
         Assert.assertFalse(bricks.contains(blueBrick));
 
         cw.removeAll();
+    }
+
+    @Test
+    public void testWin() {
+        BrickManager bm = new BrickManager(cw);
+        List<Brick> bricks = bm.getBricks();
+        Paddle paddle = new Paddle(100, 100, 10, 10);
+        cw.add(paddle);
+        Ball ball = new Ball(10, 10, 10, 10, 0, 0);
+        cw.add(ball);
+        bricks.clear();
+
+        GraphicsText winLose = bm.winningLosingCondition(ball, cw, paddle);
+        System.out.println(bricks.size());
+
+        Assert.assertEquals(winLose.getText(), "Congratulations! You Won! ");
     }
 
 }
